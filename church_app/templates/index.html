@@ -245,6 +245,46 @@
             font-size: 24px;
         }
     }
+    
+    
+
+/* Default styling for larger screens */
+/* Adjust tab styling for better fit */
+@media (max-width: 992px) {
+    .nav-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-tabs .nav-item {
+        flex: 1 1 45%; /* Two items per row on medium screens */
+        text-align: center;
+        padding: 8px 0;
+    }
+    
+    .nav-tabs .nav-item h4 {
+        display: block !important;
+        font-size: 12px; /* Smaller font size */
+        text-align: center;
+        padding: 5px; /* Add padding to avoid text overflow */
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden; /* Hide overflow text */
+        text-overflow: ellipsis; /* Add ellipsis (...) if text overflows */
+    }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+    .nav-tabs .nav-item {
+        flex: 1 1 100%; /* One item per row */
+    }
+    
+    .nav-tabs .nav-item h4 {
+        font-size: 14px; /* Increase font size slightly for readability */
+    }
+}
+
+ 
  
 
   </style>
@@ -400,7 +440,7 @@
                       <h4>Join Us!</h4>
                       <p>Be part of a loving church family that welcomes everyone. Whether you’re new to faith or looking for a place to belong, there’s a home for you here.</p>
                       <p>Take the next step in your faith journey. Join us this Sunday and become part of something greater!</p>
-                      <a href="{% url 'member' %}" class="read-more btn btn-primary mt-3">
+                      <a href="{% url 'signup' %}" class="read-more btn btn-primary mt-3">
                           <span>Join Us!</span> <i class="bi bi-arrow-right"></i>
                       </a>
                   </div>
