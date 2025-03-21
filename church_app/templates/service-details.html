@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+      <div class="container position-relative">
+        <h1>Sermons Details</h1>
+        <p>A Christian sermon is a Spirit-led message that shares biblical truth, inspires faith, and calls for spiritual transformation through Jesus Christ...</p>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Sermons Details</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Service Details Section -->
+    <section id="service-details" class="service-details section">
+
+      <div class="container">
+        
+        <div class="row gy-5">
+
+          <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            
+            <div class="service-box">
+              <h4>Latest Sermons List</h4>
+              <div class="services-list">
+                {% for i in listout %}
+                <a href="{% url 'sermon' i.id %}" class="nav-link {% if i.id == active_sermon_id %}active{% endif %}">
+                    <i class="bi bi-arrow-right-circle"></i> <span>{{ i.title }}</span>
+                </a>
+            {% endfor %}
+                <!-- <a href="#"><i class="bi bi-arrow-right-circle"></i><span>The Power of Prayer</span></a>
+                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Living Out God’s Love</span></a> -->
+                <!-- <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Graphic Design</span></a>
+                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Marketing</span></a> -->
+              </div>
+            </div><!-- End Services List -->
+           
+            <!-- <div class="service-box">
+              <h4>Download Catalog</h4>
+              <div class="download-catalog">
+                <a href="#"><i class="bi bi-filetype-pdf"></i><span>Catalog PDF</span></a>
+                <a href="#"><i class="bi bi-file-earmark-word"></i><span>Catalog DOC</span></a>
+              </div>
+            </div> -->
+            <!-- End Services List -->
+
+            <div class="help-box d-flex flex-column justify-content-center align-items-center">
+              <i class="bi bi-headset help-icon"></i>
+              <h4>Have a Question?</h4>
+              <p class="d-flex align-items-center mt-2 mb-0"><i class="bi bi-telephone me-2"></i> <span>+91 9500 8072 31</span></p>
+              <p class="d-flex align-items-center mt-1 mb-0"><i class="bi bi-envelope me-2"></i> <a href="mailto:contact@example.com">agusilai@gmail.com</a></p>
+            </div>
+
+          </div>
+            
+          <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
+            {% for i in list %}
+            <iframe width="800" height="500" src="{{i.youtubecode}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h3> {{i.title}}</h3>
+            <p>
+              {{i.description}}
+            </p>
+            <!-- <ul> -->
+              <p>
+                {{i.keywords|linebreaks}}
+              </p>
+            
+              <!-- <li><i class="bi bi-check-circle"></i> <span>Understanding God’s calling in your life</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Trusting in God’s timing and plan.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Overcoming fear and doubt</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Living boldly in your purpose</span></li> -->
+            <!-- </ul> -->
+            <!-- <p>
+              Est reprehenderit voluptatem necessitatibus asperiores neque sed ea illo. Deleniti quam sequi optio iste veniam repellat odit. Aut pariatur itaque nesciunt fuga.
+            </p> -->
+            <p>
+              {{i.body|linebreaks}}
+            </p>
+            {% endfor %}
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Service Details Section -->
+
+  </main>
+
+  {% endblock %}

@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+/* General Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Sermon Section */
+.latest-sermons-area {
+    padding: 100px 0 50px;
+}
+
+/* Sermon Card */
+.single-latest-sermons {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+}
+
+.single-latest-sermons:hover {
+    transform: translateY(-5px);
+}
+
+/* Sermon Image */
+.sermons-thumbnail {
+    position: relative;
+    overflow: hidden;
+}
+
+.sermons-thumbnail img {
+    width: 100%;
+    display: block;
+    border-radius: 10px 10px 0 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sermons-thumbnail img:hover {
+    transform: scale(1.05);
+}
+
+/* Animated Date */
+.sermons-date {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #e74c3c;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.sermons-date h6 {
+    margin: 0;
+}
+
+.sermons-date span {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Sermon Content */
+.sermons-content {
+    padding: 20px;
+}
+
+.sermons-cata {
+    margin-bottom: 10px;
+}
+
+.sermons-cata a {
+    color: #e74c3c;
+    font-size: 22px;
+    transition: color 0.3s ease-in-out;
+}
+
+.sermons-cata a:hover {
+    color: #c0392b;
+}
+
+/* Sermon Meta Data */
+.sermons-meta-data {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.sermons-meta-data p {
+    margin: 5px 0;
+}
+
+.sermons-meta-data i {
+    margin-right: 5px;
+}
+
+a{
+    text-decoration: none;
+}
+</style>
+
+<main class="main">
+
+  <!-- Page Title -->
+  <div class="page-title dark-background">
+    <div class="container position-relative">
+      <h1>Sermons Details</h1>
+      <p>A Christian sermon is a Spirit-led message that shares biblical truth, inspires faith, and calls for spiritual transformation through Jesus Christ...</p>
+      <nav class="breadcrumbs">
+        <ol>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li class="current">Sermons Details</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="latest-sermons-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12 text-center">
+                <div class="section-heading">
+                    <h2>Latest Sermons</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Single Latest Sermons -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-latest-sermons mb-100">
+                    <div class="sermons-thumbnail">
+                        <img src="{% static 'assets/img/christmasthumbnail (1).png' %}" alt="Sermon Image">
+                        <div class="sermons-date">
+                            <h6><span>04</span> DEC</h6>
+                        </div>
+                    </div>
+                    <div class="sermons-content">
+                        <div class="sermons-cata">
+                            <a href="https://www.youtube.com/watch?v=wBzyqxXKYRg&t=4495s" data-bs-toggle="tooltip" title="Watch Video">
+                                <i class="fa fa-video-camera"></i>
+                            </a>
+                        </div>
+                        <h4>கிறிஸ்துமஸ் ஆராதனை</h4>
+                        <div class="sermons-meta-data">
+                            <p><i class="fa fa-user" style="color: #e74c3c;"></i> Sermon From: <span>Pr. Joseph Balachandran</span></p>
+                            <p><i class="fa fa-tag" style="color: #e74c3c;"></i> Categories: <span>Soul Winning</span></p>
+                            <p><i class="fa fa-clock" style="color: #e74c3c;"></i> Dec 25, 2023 <span>5:00 AM - 7:30 AM</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Latest Sermons -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-latest-sermons mb-100">
+                    <div class="sermons-thumbnail">
+                        <img src="{% static 'assets/img/2025.png' %}" alt="Sermon Image">
+                        <div class="sermons-date">
+                            <h6><span>04</span> DEC</h6>
+                        </div>
+                    </div>
+                    <div class="sermons-content">
+                        <div class="sermons-cata">
+                            <a href="https://www.youtube.com/watch?v=lsFaoQYg9IQ" data-bs-toggle="tooltip" title="Watch Video">
+                                <i class="fa fa-video-camera"></i>
+                            </a>
+                        </div>
+                        <h4>புது வருட ஆராதனை</h4>
+                        <div class="sermons-meta-data">
+                            <p><i class="fa fa-user" style="color: #e74c3c;"></i> Sermon From: <span>Pr. Glady Jeyapaul</span></p>
+                            <p><i class="fa fa-tag" style="color: #e74c3c;"></i> Categories: <span>Soul Winning</span></p>
+                            <p><i class="fa fa-clock" style="color: #e74c3c;"></i> Dec 25, 2023 <span>9:00 AM - 11:30 AM</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Tooltip Activation -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+</script>
+
+{% endblock %}

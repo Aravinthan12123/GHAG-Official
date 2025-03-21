@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="main">
+
+
+  <!-- Page Title -->
+  <div class="page-title dark-background">
+    <div class="container position-relative">
+        <h1>Mens Ministry - Details</h1>
+        <h4>As iron sharpens iron, so one man sharpens another...</h4>
+        <h6>- Proverbs 27:17</h6>
+        <nav class="breadcrumbs">
+            <ol>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li class="current">Mens Ministry Details</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- End Page Title -->
+   
+
+    <!-- Ministry Details -->
+    <section class="container py-5">
+        {% for j in menministry %}
+        <div class="row align-items-center mb-5" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-md-6">
+                <img src="{{ j.image }}" alt="{{ j.title }}" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2 class="fw-bold text-secondary-emphasis">{{ j.title }}</h2>
+                
+                <p class="text-dark">{{ j.body|linebreaks }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .sermons-date {
+        transition: all 500ms;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+        width: 80px;
+        height: 80px;
+        border-radius: 5px;
+        position: absolute;
+        left: 20px;
+        bottom: -15px;
+        background-color: white;
+    }
+
+    @media (max-width: 576px) {
+        .sermons-date {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    .sermons-date h6 {
+        transition: all 500ms;
+        margin-bottom: 0;
+        text-align: center;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .sermons-date h6 span {
+        transition: all 500ms;
+        display: block;
+        font-size: 36px;
+        font-weight: 700;
+        color: #222;
+    }
+
+    @media (max-width: 768px) {
+        .sermons-date h6 span {
+            font-size: 30px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .sermons-date h6 span {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<main class="main">
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+        <div class="container position-relative">
+            <h1>Sermons Details</h1>
+            <p>A Christian sermon is a Spirit-led message that shares biblical truth, inspires faith, and calls for
+                spiritual transformation through Jesus Christ...</p>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li class="current">Sermons Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- <section id="services" class="services section">
+        <div class="container">
+            <div class="row gy-4">  -->
+                <!--  Service Item -->
+                 <!-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-cash-stack" style="color: #0dcaf0;"></i>
+                        </div>
+                        <a href="'sermon" class="stretched-link">
+                            <h3>Walking in God’s Purpose</h3>
+                        </a>
+                        <p>Learn how to walk in the unique purpose God has designed for your life by trusting Him with
+                            every step you take.</p>
+                        <p class="colour text-black-50 text-md-center">Click to watch...</p> -->
+
+                        <!-- Date Section -->
+                        <!-- <div class="sermons-date">
+                            <h6><span>04</span> DEC </h6>
+                            
+                        </div>
+                    </div>
+                </div> -->
+                <!-- End Service Item -->
+            </div> 
+        </div>
+    </section> 
+
+
+        <!-- Services Section -->
+        <br><br><section id="services" class="services section">
+
+            <!-- Section Title -->
+            <!-- <div class="container section-title" data-aos="fade-up">
+              <h2>Sermons</h2>
+              <p>What we do ...</p>
+            </div> -->
+            <!-- End Section Title -->
+      
+            <div class="container">
+      
+              <div class="row gy-4">
+                {% for sermon in sermons %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+       
+          <div class="service-item position-relative">
+              <div class="icon">
+                  <i class="bi bi-book-half" style="color: #0dcaf0;"></i>
+              </div>
+              <a href="{% url 'sermon' sermon.id %}" class="stretched-link">
+              <h3>{{ sermon.title }}</h3>
+            </a>
+              <p>{{ sermon.description }}</p>
+              <p style="font-weight: bold;">Author: {{ sermon.author }}</p>
+              
+          </div>
+          
+      </div><!-- End Service Item -->
+      {% empty %}
+          <p>No sermons available.</p>
+      {% endfor %}
+      <!-- End Service Item -->
+    </section>
+
+
+</main>
+<br><br>
+
+{% endblock %}

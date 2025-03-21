@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        background: #f8f9fa;
+    }
+
+    .profile-container {
+        display: flex;
+        max-width: 850px;
+        margin: 50px auto;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+
+    /* Sidebar */
+    .profile-sidebar {
+        background: #376392;
+        padding: 30px;
+        color: white;
+        text-align: center;
+        width: 35%;
+    }
+
+    .profile-sidebar img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid white;
+    }
+
+    .profile-sidebar h3 {
+        margin-top: 15px;
+        font-size: 22px;
+    }
+
+    .btn-edit {
+        background: white;
+        color: #007bff;
+        border: 2px solid white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        transition: 0.3s;
+    }
+
+    .btn-edit:hover {
+        background: #0056b3;
+        color: white;
+    }
+
+    /* Profile Details */
+    .profile-content {
+        padding: 30px;
+        width: 65%;
+    }
+
+    .profile-content p {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-logout {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 2px solid #dc3545;
+        color: #dc3545;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .btn-logout:hover {
+        background: #dc3545;
+        color: white;
+    }
+</style>
+
+ <!-- Page Title -->
+ <div class="page-title dark-background">
+  <div class="container position-relative">
+    <h1>Welcome to the {{ request.user.username }}</h1>
+    <p style="font-size: large">
+      You are logged in as {{ request.user.username }}</p>
+    <nav class="breadcrumbs">
+      <ol>
+        <br><br>
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+      </ol>
+    </nav>
+    
+  </div>
+</div><!-- End Page Title -->
+{% if messages %}
+
+{% for message in messages %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+
+<!-- Profile Card -->
+<div class="profile-container">
+    {% for i in profile %}
+    <!-- Sidebar -->
+    <div class="profile-sidebar">
+        {% if i.profile_image %}
+        <img src="{{ i.profile_image.url }}" alt="Profile Picture">
+        {% endif %}
+        <h3>{{ i.fullname }}</h3>
+        <a href="{% url 'memberedit' i.id %}" class="btn-edit">Edit Profile</a>
+    </div>
+
+    <!-- Profile Details -->
+   
+
+    <div class="profile-content">
+        <p><strong>Name:</strong> {{ i.full_name }}</p>
+        <p><strong>Date of Birth:</strong> {{ i.dob }}</p>
+        <p><strong>Gender:</strong> {{ i.gender }}</p>
+        <p><strong>Phone Number:</strong> {{ i.marital_status }}</p>
+        <p><strong>Email Address:</strong> {{ i.email }}</p>
+
+        <h5 class="mt-4" style="font-weight: bold;">Address Details :</h5>
+        <p><strong>Resident Name:</strong> {{ i.resident_name }}</p>
+        <p><strong>Door Number:</strong> {{ i.door_number }}</p>
+        <p><strong>Street:</strong> {{ i.street }}</p>
+        <p><strong>City:</strong> {{ i.city }}</p>
+        <p><strong>Postal Code:</strong> {{ i.postal_code }}</p>
+
+        <h5 class="mt-4" style="font-weight: bold;">Other Details :</h5>
+        <p><strong>Previous Church:</strong> {{ i.previous_church }}</p>
+        <p><strong>Areas of Interest:</strong> {{ i.ministry_interest }}</p>
+        <p><strong>Occupation:</strong> {{ i.occupation }}</p>
+        {% if certfile == 0 %}
+
+        <a href="{% url 'certificate' %}" class="btn btn-primary mt-3">Create Certificate</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% for j in file %}
+    {% if j.certificatestatus == 1 %}
+    <a href="{{j.certificate.url}}" class="btn btn-primary mt-10 mb-10" style="margin-top: 15rem; width: 10rem; height: 5rem; margin-right: 1rem;   padding: 15px 0px;">Download Certificate</a>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+.form-container {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 110vh;
+  background-color: #f4f4f9;
+  background: url("{% static 'assets/img/download.jpeg' %}") no-repeat center center fixed;
+  background-size: cover; /* Ensures the background image covers the entire page */
+
+} 
+
+.login-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 8px rgba(204, 196, 196, 0.1); */
+  width: 500px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.input-container {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+  </style>
+  
+<div class="form-container">
+  <section id="login" class="about section" >
+   
+  <div class="login-container">
+    <h2>Sign up</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required><br><br>
+        
+        <label for="email" >Email Address</label>
+        <input type="email" name="email" id="email" required><br><br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password1" id="password" required><br><br>
+        
+        <label for="confirm password">Confirm Password</label>
+        <input type="password" name="password2" id="confirm password" required><br><br>
+
+        <button type="submit">Create Account</button>
+
+        
+    </form>
+
+  </div>
+</div>
+</section>
+
+</div>
+
+<script>
+function validateForm() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+  
+    if (username === "" || password === "") {
+      errorMessage.textContent = "Both fields are required!";
+      return false;
+    }
+  
+    // Additional validation can be added here, e.g., checking for username pattern
+  
+    errorMessage.textContent = ""; // Clear error message if form is valid
+    return true;
+  }
+  
+
+</script>
+
+{% endblock %}

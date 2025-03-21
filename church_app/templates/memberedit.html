@@ -1,0 +1,399 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Membership Form</title>
+    <style>
+/* ======= Global Styles ======= */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef2f7;
+    margin: 0;
+    padding: 0;
+}
+
+/* ======= Form Container ======= */
+.membership-box {
+    width: 90%;
+    max-width: 800px;
+    background: white;
+    padding: 70px;
+    margin: 120px auto;
+    border-radius: 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ======= Form Header ======= */
+.form-heading {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* ======= Input Fields ======= */
+.input-label,
+.address-label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #34495e;
+}
+
+.input-field,
+.dropdown-field,
+.textarea-field,
+.address-field {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+.textarea-field {
+    resize: vertical;
+    height: 80px;
+}
+
+/* ======= Submit Button ======= */
+.submit-btn {
+    background-color: #2980b9;
+    color: white;
+    padding: 12px;
+    border: none;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+    background-color: #1a5276;
+}
+
+/* ======= Checkbox Styling ======= */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.checkbox-input {
+    width: auto;
+    margin-right: 10px;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+/* ======= Custom Dropdown ======= */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+.dropdown-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    background: white;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 5px;
+}
+
+.dropdown-content label {
+    display: block;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown-content label:hover {
+    background: #f1f1f1;
+}
+
+.dropdown-content input {
+    margin-right: 8px;
+}
+
+.show {
+    display: block;
+}
+
+/* ======= Address Section Styling ======= */
+h2 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-top: 20px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.address-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.address-column {
+    width: 48%; /* Adjust width for responsiveness */
+}
+
+/* ======= Responsive Design ======= */
+@media (max-width: 600px) {
+    .address-container {
+        flex-direction: column;
+    }
+
+    .address-column {
+        width: 100%;
+    }
+}
+
+.profile-img-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 15px;
+
+}
+        
+    </style>
+</head>
+<body>
+
+
+   <!-- Page Title -->
+   <div class="page-title dark-background">
+    <div class="container position-relative">
+      <h1>Edit Our Details !</h1>
+      <p>
+          Sing to the Lord, all the earth; proclaim his salvation day after day.... <span> - 1 Chronicles 16:23</span></p>
+      <nav class="breadcrumbs">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li class="current">Edit Details</li>
+        </ol>
+      </nav>
+    </div>
+  </div><!-- End Page Title -->
+    
+    <div class="membership-box">
+        {% if messages %}
+
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+        <h1 class="form-heading">Church Membership Form</h1>
+        <!-- <form action="{% url 'register_member' %}" method="POST">
+            {% csrf_token %} -->
+            <form action="#" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+            {% for i in edit %}
+            
+            {% if i.profile_image %}
+            <label for="profilePicInput">
+                <img id="profilePicPreview" name="profile_image" src="{{i.profile_image.url}}" 
+                      class="profile-img-preview">
+            </label>
+            {% endif %}
+            <label class="input-label">Profile Pic</label>
+                <input type="file" name="profile_image" id="profilePicInput" accept="image/*">
+            <label class="input-label">Full Name</label>
+            <input type="text" name="full_name" class="input-field" value="{{i.full_name}}" >
+
+            <label class="input-label">Date of Birth</label>
+            <input type="date" name="dob" class="input-field" value="{{ i.dob|date:'Y-m-d' }}"  required>
+
+            <label class="input-label">Gender</label>
+            <select name="gender" class="dropdown-field" required>
+                <option value="">Select</option>
+                <option value="Male" {% if i.gender == "Male" %}selected{% endif %}>Male</option>
+                <option value="Female" {% if i.gender == "Female" %}selected{% endif %}>Female</option>
+                <option value="Other" {% if i.gender == "Other" %}selected{% endif %}>Other</option>
+            </select>
+            
+            <label class="input-label">Marital Status</label>
+            <select name="marital_status" class="dropdown-field" required>
+                <option value="">Select</option>
+                <option value="Single" {% if i.marital_status == "Single" %}selected{% endif %}>Single</option>
+                <option value="Married" {% if i.marital_status == "Married" %}selected{% endif %}>Married</option>
+                <option value="Divorced" {% if i.marital_status == "Divorced" %}selected{% endif %}>Divorced</option>
+                <option value="Widowed" {% if i.marital_status == "Widowed" %}selected{% endif %}>Widowed</option>
+                <option value="Engaged" {% if i.marital_status == "Engaged" %}selected{% endif %}>Engaged</option>
+            </select>
+            <!-- <label class="input-label">Address</label>
+            <textarea name="address" class="textarea-field" required></textarea> -->
+
+            <label class="input-label">Phone Number</label>
+            <input type="tel" name="phone" class="input-field"  value="{{i.phone}}" required>
+
+            <label class="input-label">Alternative Contact Number</label>
+            <input type="tel" name="emergency_phone" class="input-field" value="{{i.emergency_phone}}" required>
+
+            <label class="input-label">Email Address</label>
+            <input type="email" name="email" class="input-field" value="{{i.email}}" required>
+
+            <!-- <label class="input-label">Emergency Contact Name</label>
+            <input type="text" name="emergency_name" class="input-field" required> -->
+
+            
+
+            <h2>Address Details</h2>
+            <div class="address-container" required>
+                <div class="address-column" >
+                    <label class="address-label" for="residentName">Resident Name:</label>
+                    <input type="text" id="residentName" name="residentName" class="address-field" value="{{i.resident_name}}">
+            
+                    <label class="address-label" for="street">Street:</label>
+                    <input type="text" id="street" name="street" class="address-field" value="{{i.street}}">
+
+                    <label class="address-label" for="city">City:</label>
+                    <input type="text" id="city" name="city" class="address-field" value="{{i.city}}">
+
+                    <label class="address-label" for="postalCode">Postal Code:</label>
+                    <input type="text" id="postalCode" name="postalCode" class="address-field" value="{{i.postal_code}}">
+            
+                    
+                </div>
+            
+                <div class="address-column">
+                   
+                  <label class="address-label" for="doorNumber">Door Number:</label>
+                    <input type="text" id="doorNumber" name="doorNumber" class="address-field" value="{{i.door_number}}">
+
+                    <label class="address-label" for="area">Area:</label>
+                    <input type="text" id="area" name="area" class="address-field" value="{{i.area}}">
+            
+                    <label class="address-label" for="district">District:</label>
+                    <input type="text" id="district" name="district" class="address-field" value="{{i.district}}">
+            
+                    
+                </div>
+            </div>
+            
+        
+
+            
+
+            <!-- <label class="input-label">Spiritual Background (Optional)</label>
+            <textarea name="spiritual_background" class="textarea-field"></textarea> -->
+
+            <!-- Church Transfer Field -->
+<label class="input-label">Are you transferring from another church?</label>
+<select name="church_transfer" class="dropdown-field">
+    <option value="">Select</option>
+    <option value="Yes" {% if i.church_transfer == "Yes" %}selected{% endif %}>Yes</option>
+    <option value="No" {% if i.church_transfer == "No" %}selected{% endif %}>No</option>
+</select>
+            <label class="input-label">Previous Church Name (if applicable)</label>
+            <input type="text" name="previous_church" class="input-field" value="Yes">
+
+            <!-- Areas of Interest in Ministry -->
+<div class="custom-dropdown">
+    <label class="input-label">Areas of Interest in Ministry</label>
+    <div class="dropdown-box" onclick="toggleDropdown()" id="dropdown-box">
+        {% if i.ministry_interest %}
+            {{ i.ministry_interest }}
+        {% else %}
+            Select Option ▼
+        {% endif %}
+    </div>
+    <div class="dropdown-content">
+        <label><input type="radio" name="ministry_interest" value="Worship Team" {% if i.ministry_interest == "Worship Team" %}checked{% endif %} onchange="updateSelection(event)"> Worship Team</label>
+        <label><input type="radio" name="ministry_interest" value="Youth Ministry" {% if i.ministry_interest == "Youth Ministry" %}checked{% endif %} onchange="updateSelection(event)"> Youth Ministry</label>
+        <label><input type="radio" name="ministry_interest" value="Children’s Ministry" {% if i.ministry_interest == "Children’s Ministry" %}checked{% endif %} onchange="updateSelection(event)"> Children’s Ministry</label>
+        <label><input type="radio" name="ministry_interest" value="Prayer Group" {% if i.ministry_interest == "Prayer Group" %}checked{% endif %} onchange="updateSelection(event)"> Prayer Group</label>
+        <label><input type="radio" name="ministry_interest" value="Outreach & Evangelism" {% if i.ministry_interest == "Outreach & Evangelism" %}checked{% endif %} onchange="updateSelection(event)"> Outreach & Evangelism</label>
+        <label><input type="radio" name="ministry_interest" value="Media & Technical Support" {% if i.ministry_interest == "Media & Technical Support" %}checked{% endif %} onchange="updateSelection(event)"> Media & Technical Support</label>
+        <label><input type="radio" name="ministry_interest" value="Teaching & Discipleship" {% if i.ministry_interest == "Teaching & Discipleship" %}checked{% endif %} onchange="updateSelection(event)"> Teaching & Discipleship</label>
+        <label><input type="radio" name="ministry_interest" value="Ushering & Hospitality" {% if i.ministry_interest == "Ushering & Hospitality" %}checked{% endif %} onchange="updateSelection(event)"> Ushering & Hospitality</label>
+    </div>
+    <input type="hidden" id="selectedValues" name="ministry_interest" value="{{ i.ministry_interest }}">
+</div>
+
+            
+            
+
+            <label class="input-label">Occupation</label>
+            <input type="text" name="occupation" class="input-field" value="{{i.occupation}}">
+
+            <!-- <label class="input-label">Special Skills/Talents</label>
+            <textarea name="skills" class="textarea-field"></textarea> -->
+
+            <!-- <div class="checkbox-group">
+                <input type="checkbox" name="agreement" class="checkbox-input" value="Yes">
+                <label class="checkbox-label">I agree with the church’s statement of faith and mission.</label>
+            </div> -->
+            {% endfor %}
+            <button type="submit" class="submit-btn">Update & Submit</button>
+        </form>
+    </div>
+
+    
+
+
+
+</body>
+
+<script>
+function toggleDropdown() {
+    document.querySelector(".dropdown-content").classList.toggle("show");
+}
+
+function updateSelection(event) {
+    let selected = event.target.value; // Get the selected value
+    document.querySelector(".dropdown-box").innerText = selected; // Display selected value
+    document.getElementById("selectedValues").value = selected; // Store the value in the hidden input
+    
+    // Close the dropdown after selection
+    document.querySelector(".dropdown-content").classList.remove("show");
+}
+
+// Close dropdown when clicking outside
+document.addEventListener("click", function(event) {
+    let dropdown = document.querySelector(".custom-dropdown");
+    if (!dropdown.contains(event.target)) {
+        document.querySelector(".dropdown-content").classList.remove("show");
+    }
+});
+
+</script>
+
+</html>
+
+
+{% endblock %}
