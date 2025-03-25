@@ -161,7 +161,10 @@ def user_login(request):
         
         if user is not None:
             login(request, user)  # Correct usage with two arguments
+            if request.session.get('userlogin'):
+               print("Session is active")
             if Usersstatus.objects.filter(username=username).filter(status='1'):
+               request.session['userlogin'] = True
                return redirect("dashboard")  # Redirect to the home page after login
             else:
                 messages.error(request,"you need to approvel from admin")
@@ -192,8 +195,9 @@ def dashboard(request):
         return render(request, "member.html",)
 
 def user_logout(request):
-    logout(request)
-    return redirect("login")  # Redirect to login page after logout
+    print("INSIDE THE LOGOUT")
+    request.session['userlogin'] = False
+    return redirect("/")  # Redirect to login page after logout
 
 
 
